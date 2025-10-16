@@ -1,0 +1,12 @@
+:root {
+    --bg: #f5f5f7;
+    --text: #1b1b1f;
+    --muted: #6b6b76;
+    --accent: #d97904;
+    --accent-dark: #b06103;
+    --white: #ffffff;
+    --shadow: 0 20px 60px rgba(27, 27, 31, 0.08);
+    --container-width: min(1120px, 90vw);
+    font-size: 16px;
+}
+/* ... остальное содержимое style.css опущено для краткости ... */

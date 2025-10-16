@@ -1,12 +1,393 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TheFasMaster's Website</title>
+    <title>FasMaster — внутренняя отделка под ключ</title>
+    <style>
+        :root {
+            color-scheme: light;
+            --accent: #f0a500;
+            --accent-dark: #c97a00;
+            --bg: #f9f9f9;
+            --text: #1f1f1f;
+            --muted: #6d6d6d;
+            font-family: "Inter", "Segoe UI", sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #ffffff 0%, #f4efe6 100%);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            padding: 32px 0 48px;
+        }
+
+        .container {
+            margin: 0 auto;
+            max-width: 1100px;
+            padding: 0 20px;
+        }
+
+        .top-bar {
+            align-items: center;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 32px;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .phone {
+            align-items: center;
+            color: var(--accent-dark);
+            display: inline-flex;
+            font-size: 1.1rem;
+            font-weight: 600;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .hero {
+            display: grid;
+            gap: 32px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .hero h1 {
+            font-size: clamp(2.2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1.05rem;
+            margin-bottom: 24px;
+        }
+
+        .cta {
+            background: var(--accent);
+            border-radius: 999px;
+            color: #ffffff;
+            display: inline-flex;
+            font-weight: 600;
+            padding: 14px 28px;
+            text-decoration: none;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .cta:hover {
+            box-shadow: 0 12px 24px rgba(240, 165, 0, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .hero-card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 20px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.08);
+            padding: 28px;
+        }
+
+        .hero-card h2 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        section {
+            padding: 72px 0;
+        }
+
+        h2.section-title {
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            margin-bottom: 16px;
+            text-align: center;
+        }
+
+        p.section-subtitle {
+            color: var(--muted);
+            margin-bottom: 44px;
+            text-align: center;
+        }
+
+        .service-grid {
+            display: grid;
+            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .service-card {
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 14px 30px rgba(0, 0, 0, 0.07);
+            padding: 28px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 18px 46px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .service-card ul {
+            color: var(--muted);
+            list-style: none;
+        }
+
+        .service-card ul li {
+            margin-bottom: 8px;
+            padding-left: 18px;
+            position: relative;
+        }
+
+        .service-card ul li::before {
+            background: var(--accent);
+            border-radius: 50%;
+            content: "";
+            height: 6px;
+            left: 0;
+            position: absolute;
+            top: 10px;
+            width: 6px;
+        }
+
+        .gallery {
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
+
+        .gallery figure {
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 16px 34px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .gallery img {
+            aspect-ratio: 4 / 3;
+            display: block;
+            object-fit: cover;
+            width: 100%;
+        }
+
+        .gallery figcaption {
+            color: var(--muted);
+            font-size: 0.95rem;
+            padding: 16px 18px 20px;
+        }
+
+        .benefits {
+            display: grid;
+            gap: 24px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        }
+
+        .benefit-card {
+            background: #ffffff;
+            border-radius: 18px;
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.08);
+            padding: 28px;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .benefit-card p {
+            color: var(--muted);
+        }
+
+        .contact {
+            background: linear-gradient(135deg, #f4efe6 0%, #ffffff 100%);
+            border-radius: 28px;
+            padding: 48px 32px;
+            text-align: center;
+        }
+
+        .contact h2 {
+            margin-bottom: 12px;
+        }
+
+        .contact p {
+            color: var(--muted);
+            font-size: 1.05rem;
+            margin-bottom: 24px;
+        }
+
+        footer {
+            background: #111111;
+            color: #f2f2f2;
+            padding: 32px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #f2f2f2;
+            text-decoration: none;
+        }
+
+        @media (max-width: 640px) {
+            .top-bar {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .contact {
+                padding: 36px 24px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to TheFasMaster's Website</h1>
-    <p>This is a GitHub Pages site.</p>
+    <header>
+        <div class="container">
+            <div class="top-bar">
+                <div class="logo">FasMaster</div>
+                <a class="phone" href="tel:+79819285328">+7 (981) 928-53-28</a>
+            </div>
+            <div class="hero">
+                <div>
+                    <h1>Внутренняя отделка под ключ в Санкт-Петербурге и ЛО</h1>
+                    <p>Создаём интерьеры с вниманием к деталям: от подготовки поверхностей и монтажа инженерии до укладки плитки и чистовой отделки. Работаем точно в срок и с гарантией качества.</p>
+                    <a class="cta" href="tel:+79819285328">Позвонить мастеру</a>
+                </div>
+                <div class="hero-card">
+                    <h2>Комплекс работ</h2>
+                    <p>Берём на себя весь цикл отделки: штукатурка, стяжка, электрика, потолки, плитка, сантехника, сборка мебели.</p>
+                    <h2>Контроль качества</h2>
+                    <p>Подробные сметы, фотоотчёты с объектов и прозрачные этапы работ — вы всегда знаете, что происходит на объекте.</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div class="container">
+                <h2 class="section-title">Услуги FasMaster</h2>
+                <p class="section-subtitle">Выполняем ремонт и отделку квартир, домов, офисов и коммерческих помещений.</p>
+                <div class="service-grid">
+                    <article class="service-card">
+                        <h3>Черновая отделка</h3>
+                        <ul>
+                            <li>Выравнивание стен и потолков</li>
+                            <li>Заливка стяжки и утепление полов</li>
+                            <li>Гидроизоляция и шумоизоляция</li>
+                        </ul>
+                    </article>
+                    <article class="service-card">
+                        <h3>Инженерные работы</h3>
+                        <ul>
+                            <li>Монтаж электропроводки и щитов</li>
+                            <li>Разводка водоснабжения и отопления</li>
+                            <li>Установка сантехники и оборудования</li>
+                        </ul>
+                    </article>
+                    <article class="service-card">
+                        <h3>Чистовая отделка</h3>
+                        <ul>
+                            <li>Оклейка обоев, окраска, декоративная штукатурка</li>
+                            <li>Монтаж натяжных и гипсокартонных потолков</li>
+                            <li>Укладка плитки, паркета, винила и ламината</li>
+                        </ul>
+                    </article>
+                    <article class="service-card">
+                        <h3>Авторский надзор</h3>
+                        <ul>
+                            <li>Работа по дизайн-проекту или помогаем создать его</li>
+                            <li>Подбор материалов и мебели, комплектация</li>
+                            <li>Контроль сроков и прозрачный бюджет</li>
+                        </ul>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section style="background:#ffffff;">
+            <div class="container">
+                <h2 class="section-title">Недавние проекты</h2>
+                <p class="section-subtitle">Каждый объект — это индивидуальный подход, аккуратность и доверие наших заказчиков.</p>
+                <div class="gallery">
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1616628182501-70fa9df5f0b9?auto=format&fit=crop&w=900&q=80" alt="Штукатурные работы">
+                        <figcaption>Штукатурные работы и подготовка стен под покраску.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=900&q=80" alt="Укладка плитки">
+                        <figcaption>Точная укладка керамогранита в санузле.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1600607687920-4e2a33b0735d?auto=format&fit=crop&w=900&q=80" alt="Монтаж потолков">
+                        <figcaption>Монтаж многоуровневого гипсокартонного потолка.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="https://images.unsplash.com/photo-1616627561981-3b3b3f4ebffd?auto=format&fit=crop&w=900&q=80" alt="Светлая гостиная">
+                        <figcaption>Современный интерьер в светлой эстетике clean design.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title">Почему выбирают нас</h2>
+                <div class="benefits">
+                    <article class="benefit-card">
+                        <h3>Фиксированные сроки</h3>
+                        <p>Уточняем план работ, составляем календарь и придерживаемся графика — без сюрпризов и задержек.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <h3>Прозрачная смета</h3>
+                        <p>Детально расписываем материалы и работы, помогаем оптимизировать бюджет без потери качества.</p>
+                    </article>
+                    <article class="benefit-card">
+                        <h3>Гарантия результата</h3>
+                        <p>Предоставляем гарантию на выполненные работы и остаёмся на связи для сопровождения проекта.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="contact">
+                    <h2>Готовы обсудить ваш проект?</h2>
+                    <p>Позвоните или напишите, чтобы получить консультацию и бесплатный предварительный расчёт стоимости.</p>
+                    <a class="cta" href="tel:+79819285328">+7 (981) 928-53-28</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>© FasMaster, 2024 · внутренние отделочные работы под ключ</p>
+            <p><a href="tel:+79819285328">+7 (981) 928-53-28</a></p>
+        </div>
+    </footer>
 </body>
 </html>

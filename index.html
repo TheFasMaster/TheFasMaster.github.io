@@ -58,22 +58,9 @@
         }
 
         .logo {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
             font-weight: 700;
-            font-size: 1.35rem;
+            font-size: 1.3rem;
             letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-
-        .logo img {
-            width: 44px;
-            height: 44px;
-        }
-
-        .logo .logo-text {
-            color: inherit;
         }
 
         .nav-links {
@@ -122,31 +109,9 @@
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 5vw, 4rem);
-            line-height: 1.05;
-            margin-bottom: 18px;
-        }
-
-        .hero h1 span {
-            display: block;
-            font-size: clamp(3.6rem, 6vw, 4.8rem);
-            font-weight: 700;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-            color: var(--accent-dark);
-            margin-bottom: 12px;
-        }
-
-        .hero .hero-location {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 10px 18px;
-            background: rgba(240, 180, 41, 0.16);
-            border-radius: 999px;
-            color: var(--accent-dark);
-            font-weight: 600;
-            margin-bottom: 20px;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            line-height: 1.1;
+            margin-bottom: 24px;
         }
 
         .hero p {
@@ -424,11 +389,6 @@
                 order: -1;
             }
 
-            .hero .hero-location {
-                margin-left: auto;
-                margin-right: auto;
-            }
-
             .nav-links {
                 display: none;
             }
@@ -457,10 +417,7 @@
 <body>
     <header>
         <div class="container nav">
-            <div class="logo">
-                <img src="assets/logo.svg" alt="Логотип FasMaster">
-                <span class="logo-text">FasMaster</span>
-            </div>
+            <div class="logo">FasMaster</div>
             <nav class="nav-links">
                 <a href="#services">Услуги</a>
                 <a href="#portfolio">Портфолио</a>
@@ -475,8 +432,7 @@
         <section class="hero container">
             <div>
                 <div class="badge">интерьер, ремонт, мебель, светлая эстетика</div>
-                <div class="hero-location">Санкт-Петербург · внутренняя отделка под ключ</div>
-                <h1><span>FasMaster</span>Внутренняя отделка с вниманием к каждой детали</h1>
+                <h1>Внутренняя отделка под ключ с вниманием к каждой детали</h1>
                 <p>Создаём современные интерьеры, в которых гармония материалов сочетается с технической точностью. Ведём проекты от идеи до финальной сдачи, используя собственные бригады и прозрачные сметы.</p>
                 <a class="cta-button" href="#contact">Заказать консультацию</a>
                 <div class="hero-highlights">
@@ -486,7 +442,7 @@
                     </div>
                     <div class="hero-card">
                         <strong>120+</strong>
-                        завершённых объектов в Санкт-Петербурге и области
+                        завершённых объектов в Москве и области
                     </div>
                     <div class="hero-card">
                         <strong>5 лет</strong>
@@ -495,7 +451,7 @@
                 </div>
             </div>
             <div class="hero-media">
-                <img src="assets/images/hero-collage.svg" alt="FasMaster — внутренняя отделка в Санкт-Петербурге">
+                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80" alt="Современный интерьер от FasMaster">
             </div>
         </section>
 
@@ -507,38 +463,31 @@
                 </div>
                 <div class="services-grid">
                     <article class="service-card">
-                        <img src="assets/images/service-plaster.svg" alt="Черновая отделка">
+                        <img src="https://images.unsplash.com/photo-1582719478302-62b6d2a5cf1c?auto=format&fit=crop&w=900&q=80" alt="Штукатурные работы">
                         <div class="content">
                             <h3>Черновая отделка</h3>
                             <p>Выравнивание стен и потолков, шумоизоляция, подготовка оснований под финишные покрытия с использованием лазерных уровней.</p>
                         </div>
                     </article>
                     <article class="service-card">
-                        <img src="assets/images/service-tiling.svg" alt="Монтаж плитки">
+                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=900&q=80" alt="Монтаж плитки">
                         <div class="content">
                             <h3>Финишные покрытия</h3>
                             <p>Плитка, декоративные штукатурки, покраска, монтаж напольных покрытий, установка межкомнатных дверей и плинтусов.</p>
                         </div>
                     </article>
                     <article class="service-card">
-                        <img src="assets/images/service-electro.svg" alt="Инженерные сети">
+                        <img src="https://images.unsplash.com/photo-1558002038-1055907df827?auto=format&fit=crop&w=900&q=80" alt="Прокладка инженерных коммуникаций">
                         <div class="content">
                             <h3>Инженерные сети</h3>
                             <p>Электрика, слаботочные сети, сантехника, вентиляция и кондиционирование с соблюдением норм и схем подключения.</p>
                         </div>
                     </article>
                     <article class="service-card">
-                        <img src="assets/images/service-ceiling.svg" alt="Потолочные системы">
+                        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=900&q=80" alt="Монтаж потолков">
                         <div class="content">
                             <h3>Потолочные системы</h3>
                             <p>Многоуровневые конструкции, акустические потолки, встроенное освещение и световые линии под архитектуру проекта.</p>
-                        </div>
-                    </article>
-                    <article class="service-card">
-                        <img src="assets/images/service-trim.svg" alt="Финишная доводка">
-                        <div class="content">
-                            <h3>Финишная доводка</h3>
-                            <p>Монтаж встроенной мебели, контроль качества отделки, настройка света и декора перед сдачей объекта.</p>
                         </div>
                     </article>
                 </div>
@@ -553,19 +502,19 @@
                 </div>
                 <div class="portfolio-grid">
                     <div class="portfolio-item">
-                        <img src="assets/images/portfolio-living.svg" alt="Светлая гостиная">
+                        <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?auto=format&fit=crop&w=900&q=80" alt="Светлый минимализм">
                         <div class="caption">Светлый минимализм: квартира 120 м² с встроенной мебелью и дизайнерским освещением.</div>
                     </div>
                     <div class="portfolio-item">
-                        <img src="assets/images/portfolio-loft.svg" alt="Лофт в центре">
-                        <div class="caption">Лофт в центре Петербурга: бетон, металл и натуральное дерево в функциональном пространстве.</div>
+                        <img src="https://images.unsplash.com/photo-1616594039964-660373c55b09?auto=format&fit=crop&w=900&q=80" alt="Лофт в новостройке">
+                        <div class="caption">Лофт в новостройке: бетон, металл и натуральное дерево в функциональном пространстве.</div>
                     </div>
                     <div class="portfolio-item">
-                        <img src="assets/images/portfolio-office.svg" alt="Коммерческий объект">
+                        <img src="https://images.unsplash.com/photo-1595526114035-0d45ed6471eb?auto=format&fit=crop&w=900&q=80" alt="Офис FasMaster">
                         <div class="caption">Коммерческий объект: офис с переговорными, акустическими потолками и медиа-зоной.</div>
                     </div>
                     <div class="portfolio-item">
-                        <img src="assets/images/portfolio-bath.svg" alt="Санузел премиум">
+                        <img src="https://images.unsplash.com/photo-1616628182501-ea55a7dd8d32?auto=format&fit=crop&w=900&q=80" alt="Санузел премиум-класса">
                         <div class="caption">Санузел премиум-класса: сложная плитка, скрытый монтаж сантехники и подсветка.</div>
                     </div>
                 </div>
@@ -649,9 +598,9 @@
                     </div>
                     <div class="contact-card">
                         <h3>Контактные данные</h3>
-                        <p><strong>Телефон:</strong> <a href="tel:+79819285328">+7 (981) 928-53-28</a></p>
+                        <p><strong>Телефон:</strong> <a href="tel:+74951234567">+7 (495) 123-45-67</a></p>
                         <p><strong>Email:</strong> <a href="mailto:info@fasmaster.ru">info@fasmaster.ru</a></p>
-                        <p><strong>Офис:</strong> Санкт-Петербург, наб. канала Грибоедова, 88</p>
+                        <p><strong>Офис:</strong> Москва, Берсеневская набережная, 18</p>
                         <p><strong>График:</strong> Пн–Сб 10:00–19:00</p>
                         <p><strong>Социальные сети:</strong> <a href="#">Instagram</a> · <a href="#">Telegram</a> · <a href="#">VK</a></p>
                     </div>
@@ -680,10 +629,7 @@
 
     <footer>
         <div class="container">
-            <div class="logo" style="color: #fff;">
-                <img src="assets/logo.svg" alt="Логотип FasMaster">
-                <span class="logo-text">FasMaster</span>
-            </div>
+            <div class="logo" style="color: #fff;">FasMaster</div>
             <div>Качество, точность и стиль в каждом интерьере.</div>
             <div class="footer-bottom">
                 <div>© FasMaster, 2024. Все права защищены.</div>

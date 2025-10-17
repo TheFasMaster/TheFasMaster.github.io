@@ -333,6 +333,83 @@
             box-shadow: 0 20px 32px rgba(15, 15, 15, 0.06);
         }
 
+        /* --- PRICING TABLE --- */
+        .pricing-table-wrapper {
+            overflow: auto;
+            background: var(--surface);
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            box-shadow: 0 16px 24px rgba(15, 15, 15, 0.04);
+        }
+
+        table.pricing {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 780px;
+        }
+
+        table.pricing th,
+        table.pricing td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border);
+            text-align: left;
+        }
+
+        table.pricing th {
+            position: sticky;
+            top: 0;
+            background: #fff8e6;
+            color: #6b4700;
+            font-weight: 700;
+            z-index: 1;
+        }
+
+        table.pricing tr:nth-child(even) td {
+            background: #fafafa;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            background: rgba(240, 180, 41, 0.15);
+            color: var(--accent-dark);
+            font-weight: 600;
+        }
+
+        .note {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 10px;
+        }
+
+        .export-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 18px 0 0;
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: #fff;
+            color: var(--text);
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            box-shadow: 0 6px 16px rgba(240, 180, 41, 0.18);
+        }
+
         form {
             display: grid;
             gap: 18px;
@@ -442,6 +519,7 @@
             <nav class="nav-links" aria-label="Основное меню">
                 <a href="#services">Услуги</a>
                 <a href="#portfolio">Портфолио</a>
+                <a href="#pricing">Цены</a>
                 <a href="#process">Процесс</a>
                 <a href="#contact">Контакты</a>
             </nav>
@@ -472,7 +550,7 @@
                 </div>
             </div>
             <div class="hero-media">
-                <img src="https://images.unsplash.com/photo-1601597111158-2fceff292035?auto=format&fit=crop&w=900&q=80" alt="Команда FasMaster выполняет отделочные работы в пустом помещении" loading="eager" decoding="async">
+                <img src="images/plastering-worker.svg" alt="Мастер в оранжевом шлеме наносит штукатурку на стену" loading="eager" decoding="async">
             </div>
         </section>
 
@@ -523,20 +601,20 @@
                 </div>
                 <div class="portfolio-grid">
                     <div class="portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80" alt="Штукатурка стен на объекте без мебели" loading="lazy" decoding="async">
-                        <div class="caption">Подготовка стен: механизированная штукатурка и выведение углов в квартире без мебели.</div>
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=900&q=80" alt="Современный интерьер" loading="lazy" decoding="async">
+                        <div class="caption">Современный интерьер: чистые линии, мягкий свет, тепло натурального дерева.</div>
                     </div>
                     <div class="portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1581091870627-3a7e671d73d5?auto=format&fit=crop&w=900&q=80" alt="Монтаж инженерных систем на объекте" loading="lazy" decoding="async">
-                        <div class="caption">Инженерные сети: разводка кабеля, монтаж распределительных коробок и проверка схем.</div>
+                        <img src="https://images.unsplash.com/photo-1581091870627-3a7e671d73d5?auto=format&fit=crop&w=900&q=80" alt="Коммерческий объект" loading="lazy" decoding="async">
+                        <div class="caption">Коммерческий объект: детальная отделка офисных пространств с акцентом на эргономику.</div>
                     </div>
                     <div class="portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1581091215367-59ab6b128c2f?auto=format&fit=crop&w=900&q=80" alt="Работы по устройству потолка" loading="lazy" decoding="async">
-                        <div class="caption">Потолочные системы: установка профилей, монтаж гипсокартона и интеграция освещения.</div>
+                        <img src="https://images.unsplash.com/photo-1581091215367-59ab6b128c2f?auto=format&fit=crop&w=900&q=80" alt="Инженерные сети" loading="lazy" decoding="async">
+                        <div class="caption">Инженерные сети: разводка кабеля, монтаж коробок и проверка схем безопасности.</div>
                     </div>
                     <div class="portfolio-item">
-                        <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&w=900&q=80" alt="Отделка санузла без мебели" loading="lazy" decoding="async">
-                        <div class="caption">Санузел под ключ: укладка плитки, гидроизоляция и подготовка под установку сантехники.</div>
+                        <img src="https://images.unsplash.com/photo-1581090700227-1e37b190418e?auto=format&fit=crop&w=900&q=80" alt="Потолочные системы" loading="lazy" decoding="async">
+                        <div class="caption">Потолочные системы: профили, гипсокартон и интеграция линий света.</div>
                     </div>
                 </div>
                 <div class="stats">
@@ -552,6 +630,130 @@
                         <strong>14 дней</strong>
                         средний срок подготовки сметы и графика производства
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- === NEW PRICING SECTION (СПб, внутренняя отделка по частям) === -->
+        <section id="pricing">
+            <div class="container">
+                <div class="section-title">
+                    <h2>Цены (СПб): внутренняя отделка по частям</h2>
+                    <p>
+                        Ориентиры по Санкт-Петербургу. Конечная цена зависит от сложности, материалов и состояния основания.
+                        <span class="tag">Частники на Авито: обычно −10–20% от прайсов компаний</span>
+                    </p>
+                </div>
+                <div class="pricing-table-wrapper">
+                    <table class="pricing" aria-describedby="pricing-note">
+                        <thead>
+                            <tr>
+                                <th>Раздел</th>
+                                <th>Работа</th>
+                                <th>Ед. изм.</th>
+                                <th>Диапазон цены, ₽</th>
+                                <th>Комментарий</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Подготовка</td>
+                                <td>Грунтовка стен (1 слой)</td>
+                                <td>м²</td>
+                                <td>80 — 120</td>
+                                <td>Базовый цикл, по ровному основанию</td>
+                            </tr>
+                            <tr>
+                                <td>Шпатлёвка</td>
+                                <td>Шпатлёвка стен (1 слой)</td>
+                                <td>м²</td>
+                                <td>250 — 450</td>
+                                <td>Подготовка под финиш</td>
+                            </tr>
+                            <tr>
+                                <td>Шпатлёвка</td>
+                                <td>Финиш под покраску</td>
+                                <td>м²</td>
+                                <td>800 — 1100</td>
+                                <td>Требует качественной подготовки</td>
+                            </tr>
+                            <tr>
+                                <td>Штукатурка</td>
+                                <td>По маякам (ручная)</td>
+                                <td>м²</td>
+                                <td>700 — 1200</td>
+                                <td>Зависит от толщины слоя</td>
+                            </tr>
+                            <tr>
+                                <td>Стяжка</td>
+                                <td>Самовыравнивающаяся</td>
+                                <td>м²</td>
+                                <td>250 — 400</td>
+                                <td>Толщина влияет на расход</td>
+                            </tr>
+                            <tr>
+                                <td>Плитка</td>
+                                <td>Пол</td>
+                                <td>м²</td>
+                                <td>1200 — 1800</td>
+                                <td>Керамогранит дороже</td>
+                            </tr>
+                            <tr>
+                                <td>Плитка</td>
+                                <td>Стены</td>
+                                <td>м²</td>
+                                <td>1500 — 2200</td>
+                                <td>Сложные раскладки +10–30%</td>
+                            </tr>
+                            <tr>
+                                <td>Обои</td>
+                                <td>Поклейка (стандарт)</td>
+                                <td>м²</td>
+                                <td>210 — 680</td>
+                                <td>Тип обоев влияет на цену</td>
+                            </tr>
+                            <tr>
+                                <td>Покраска</td>
+                                <td>Стены (2 слоя)</td>
+                                <td>м²</td>
+                                <td>500 — 800</td>
+                                <td>Без учёта выравнивания</td>
+                            </tr>
+                            <tr>
+                                <td>ГКЛ</td>
+                                <td>Перегородка (двухсторонняя)</td>
+                                <td>м²</td>
+                                <td>500 — 800</td>
+                                <td>С шумоизоляцией дороже</td>
+                            </tr>
+                            <tr>
+                                <td>Потолки</td>
+                                <td>Подвесной (ГКЛ)</td>
+                                <td>м²</td>
+                                <td>500 — 800</td>
+                                <td>Многоуровневые дороже</td>
+                            </tr>
+                            <tr>
+                                <td>Двери</td>
+                                <td>Установка межкомнатной</td>
+                                <td>шт</td>
+                                <td>2100 — 3500</td>
+                                <td>С доборами/фурнитурой дороже</td>
+                            </tr>
+                            <tr>
+                                <td>Электрика</td>
+                                <td>Розетка / выключатель (точка)</td>
+                                <td>шт</td>
+                                <td>340 — 500</td>
+                                <td>Штроба и длина трассы отдельно</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="note" id="pricing-note">* Данные основаны на средних рыночных значениях по СПб. Для точной сметы предложим выезд и диагностику объекта.</div>
+                <div class="export-row">
+                    <button class="btn-secondary" id="exportCsv">Скачать CSV из таблицы</button>
+                    <a class="btn-secondary" href="/mnt/data/avito_spb_otdelka_template.xlsx" download>Скачать Excel-шаблон</a>
                 </div>
             </div>
         </section>
@@ -663,10 +865,34 @@
             </div>
             <div>Качество, точность и стиль в каждом интерьере.</div>
             <div class="footer-bottom">
-                <div>© FasMaster, 2024. Все права защищены.</div>
+                <div>© FasMaster, 2025. Все права защищены.</div>
                 <div>Политика конфиденциальности · Договор оферты</div>
             </div>
         </div>
     </footer>
+<script>
+    // Экспорт CSV из таблицы "Цены"
+    document.getElementById('exportCsv')?.addEventListener('click', () => {
+        const table = document.querySelector('table.pricing');
+        if (!table) return;
+
+        const rows = Array.from(table.querySelectorAll('tr'));
+        const csv = rows
+            .map((row) =>
+                Array.from(row.querySelectorAll('th,td'))
+                    .map((cell) => '"' + (cell.innerText || '').replace(/"/g, '""') + '"')
+                    .join(',')
+            )
+            .join('\n');
+
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'fasmaster_spb_pricing.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+    });
+</script>
 </body>
 </html>

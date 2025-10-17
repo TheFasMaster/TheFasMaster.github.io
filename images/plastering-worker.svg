@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" role="img" aria-labelledby="title desc">
+  <title id="title">Мастер наносит штукатурку на стену</title>
+  <desc id="desc">Иллюстрация мастера в оранжевом шлеме, который наносит штукатурку на яркую стену с помощью широкого шпателя.</desc>
+  <defs>
+    <linearGradient id="wall" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6c22b"/>
+      <stop offset="100%" stop-color="#f0a71f"/>
+    </linearGradient>
+    <linearGradient id="plaster" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f3efe8"/>
+      <stop offset="100%" stop-color="#dad3c8"/>
+    </linearGradient>
+  </defs>
+  <rect width="960" height="720" fill="url(#wall)"/>
+  <rect x="620" y="120" width="260" height="260" fill="#eef1f7" stroke="#d2d7e0" stroke-width="12" rx="16"/>
+  <rect x="620" y="260" width="260" height="8" fill="#d2d7e0"/>
+  <rect x="748" y="120" width="8" height="260" fill="#d2d7e0"/>
+  <g opacity="0.3">
+    <path d="M120 180 L620 260" stroke="#f7d357" stroke-width="16" stroke-linecap="round"/>
+    <path d="M120 280 L620 360" stroke="#f7d357" stroke-width="16" stroke-linecap="round"/>
+    <path d="M120 380 L620 460" stroke="#f7d357" stroke-width="16" stroke-linecap="round"/>
+  </g>
+  <g id="worker" transform="translate(220 140)">
+    <path d="M160 220 H360 L400 470 H120 Z" fill="#3e4654"/>
+    <path d="M160 220 L120 180 L320 180 L360 220 Z" fill="#2f3542"/>
+    <path d="M200 160 H320 V220 H200 Z" fill="#f48220"/>
+    <path d="M210 260 H350 V288 H210 Z" fill="#f48220"/>
+    <path d="M188 288 H372 V316 H188 Z" fill="#f48220"/>
+    <path d="M128 210 L360 210 L396 250 L104 250 Z" fill="#2f3542"/>
+    <path d="M236 80 H314 V150 H236 Z" fill="#f7d6a8" rx="12"/>
+    <path d="M224 60 Q275 0 326 60 V110 H224 Z" fill="#f47b20"/>
+    <rect x="236" y="144" width="78" height="22" fill="#e56d18"/>
+    <circle cx="262" cy="118" r="8" fill="#2f3542"/>
+    <circle cx="298" cy="118" r="8" fill="#2f3542"/>
+    <path d="M284 126 L300 140 L284 140 Z" fill="#e1b47c"/>
+    <path d="M320 210 L480 170 L508 210 L352 250 Z" fill="#2f3542"/>
+    <path d="M460 140 L600 80 L620 110 L484 182 Z" fill="#dadada" stroke="#a9a9a9" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M460 170 L520 120 L540 150 L480 198 Z" fill="#48423f"/>
+    <path d="M520 120 L720 60 L760 110 L560 190 Z" fill="url(#plaster)" stroke="#c7bfb1" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M700 70 Q740 120 700 160 Q640 210 560 190 Z" fill="#e9e3d6" opacity="0.7"/>
+    <rect x="180" y="470" width="40" height="160" fill="#2b303a"/>
+    <rect x="320" y="470" width="40" height="160" fill="#2b303a"/>
+    <rect x="172" y="620" width="56" height="40" fill="#1c232c"/>
+    <rect x="312" y="620" width="56" height="40" fill="#1c232c"/>
+    <path d="M210 520 L310 520 L320 612 L200 612 Z" fill="#454c5a"/>
+    <ellipse cx="70" cy="460" rx="90" ry="70" fill="#929aa2"/>
+    <rect x="56" y="460" width="28" height="120" fill="#5b636c"/>
+  </g>
+</svg>

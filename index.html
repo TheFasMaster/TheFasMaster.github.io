@@ -1,4 +1,34 @@
-<!DOCTYPE html>
+# Build a full HTML site with corrected pricing table and package it as ZIP
+import os, zipfile, pandas as pd, html
+
+# 1) Load the corrected CSV (already UTF-8)
+csv_path = "/mnt/data/avito_spb_otdelka_template.csv"
+df = pd.read_csv(csv_path)
+
+# 2) Ensure the new column exists
+if "Ссылка Авито" not in df.columns:
+    df["Ссылка Авито"] = ""
+
+# 3) Convert rows to HTML with clickable "Источник (ссылка)"
+def row_to_html(row):
+    src = html.escape(str(row.get("Источник (ссылка)", "") or ""))
+    src_td = f'<a href="{src}" target="_blank" rel="noopener">Источник</a>' if src else ""
+    return (
+        f"<tr>"
+        f"<td>{html.escape(str(row.get('Раздел', '')))}</td>"
+        f"<td>{html.escape(str(row.get('Работа', '')))}</td>"
+        f"<td>{html.escape(str(row.get('Ед.изм.', '')))}</td>"
+        f"<td>{html.escape(str(row.get('Нижняя цена', '')))} — {html.escape(str(row.get('Верхняя цена', '')))}</td>"
+        f"<td>{html.escape(str(row.get('Комментарий', '')))}</td>"
+        f"<td>{src_td}</td>"
+        f"<td></td>"
+        f"</tr>"
+    )
+
+table_rows_html = "\n".join(df.apply(row_to_html, axis=1).tolist())
+
+# 4) Compose full HTML
+html_content = f"""<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +39,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
+        :root {{
             --accent: #f0b429;
             --accent-dark: #d48a00;
             --text: #1f1f1f;
@@ -17,50 +47,50 @@
             --bg: #f7f7f8;
             --surface: #ffffff;
             --border: #e3e3e6;
-        }
-        *,*::before,*::after { box-sizing: border-box; }
-        body { margin:0; font-family:'Manrope',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }
-        img { max-width:100%; display:block; border-radius:12px; }
-        header { position:sticky; top:0; z-index:10; backdrop-filter:blur(12px); background:rgba(247,247,248,.9); border-bottom:1px solid rgba(227,227,230,.8);}
-        .container { width:min(1200px,92vw); margin:0 auto; }
-        .nav { display:flex; align-items:center; justify-content:space-between; padding:18px 0; }
-        .logo { display:inline-flex; align-items:center; gap:12px; font-weight:700; font-size:1.3rem; letter-spacing:.04em; }
-        .nav-links { display:flex; gap:24px; }
-        .nav-links a { color:var(--text-muted); text-decoration:none; font-weight:500; transition:color .2s ease; }
-        .nav-links a:hover { color:var(--accent-dark);}
-        .cta-button { display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:999px; border:none; background:linear-gradient(135deg,var(--accent),var(--accent-dark)); color:#fff; font-weight:600; font-size:.95rem; cursor:pointer; box-shadow:0 14px 24px rgba(240,180,41,.25); transition:transform .2s ease, box-shadow .2s ease; }
-        .cta-button:hover { transform:translateY(-2px); box-shadow:0 18px 32px rgba(212,138,0,.3);}
-        .hero { padding:120px 0 80px; display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:64px; align-items:center; }
-        .hero h1 { font-size: clamp(2.5rem,4vw,3.5rem); line-height:1.1; margin-bottom:24px; }
-        .hero p { font-size:1.05rem; color:var(--text-muted); margin-bottom:32px; }
-        .badge { display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; background: rgba(240,180,41,.12); color:var(--accent-dark); font-weight:600; font-size:.85rem; margin-bottom:20px; }
-        section { padding:90px 0; }
-        .section-title { text-align:center; margin-bottom:48px; }
-        .section-title h2 { font-size: clamp(2rem,3vw,2.6rem); margin-bottom:12px; }
-        .section-title p { color:var(--text-muted); max-width:580px; margin:0 auto; }
-        .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:28px; }
-        .service-card { background:var(--surface); border:1px solid var(--border); border-radius:18px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 16px 24px rgba(15,15,15,.04); }
-        .service-card img { aspect-ratio:4/3; object-fit:cover; }
-        .service-card .content { padding:24px; }
-        .portfolio-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }
-        .portfolio-item { background:var(--surface); border-radius:18px; overflow:hidden; border:1px solid var(--border); box-shadow:0 16px 24px rgba(15,15,15,.04); }
-        .portfolio-item img { aspect-ratio:4/3; object-fit:cover; }
+        }}
+        *,*::before,*::after {{ box-sizing: border-box; }}
+        body {{ margin:0; font-family:'Manrope',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; background:var(--bg); color:var(--text); line-height:1.6; }}
+        img {{ max-width:100%; display:block; border-radius:12px; }}
+        header {{ position:sticky; top:0; z-index:10; backdrop-filter:blur(12px); background:rgba(247,247,248,.9); border-bottom:1px solid rgba(227,227,230,.8);}}
+        .container {{ width:min(1200px,92vw); margin:0 auto; }}
+        .nav {{ display:flex; align-items:center; justify-content:space-between; padding:18px 0; }}
+        .logo {{ display:inline-flex; align-items:center; gap:12px; font-weight:700; font-size:1.3rem; letter-spacing:.04em; }}
+        .nav-links {{ display:flex; gap:24px; }}
+        .nav-links a {{ color:var(--text-muted); text-decoration:none; font-weight:500; transition:color .2s ease; }}
+        .nav-links a:hover {{ color:var(--accent-dark);}}
+        .cta-button {{ display:inline-flex; align-items:center; gap:8px; padding:12px 22px; border-radius:999px; border:none; background:linear-gradient(135deg,var(--accent),var(--accent-dark)); color:#fff; font-weight:600; font-size:.95rem; cursor:pointer; box-shadow:0 14px 24px rgba(240,180,41,.25); transition:transform .2s ease, box-shadow .2s ease; }}
+        .cta-button:hover {{ transform:translateY(-2px); box-shadow:0 18px 32px rgba(212,138,0,.3);}}
+        .hero {{ padding:120px 0 80px; display:grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap:64px; align-items:center; }}
+        .hero h1 {{ font-size: clamp(2.5rem,4vw,3.5rem); line-height:1.1; margin-bottom:24px; }}
+        .hero p {{ font-size:1.05rem; color:var(--text-muted); margin-bottom:32px; }}
+        .badge {{ display:inline-flex; align-items:center; gap:8px; padding:8px 14px; border-radius:999px; background: rgba(240,180,41,.12); color:var(--accent-dark); font-weight:600; font-size:.85rem; margin-bottom:20px; }}
+        section {{ padding:90px 0; }}
+        .section-title {{ text-align:center; margin-bottom:48px; }}
+        .section-title h2 {{ font-size: clamp(2rem,3vw,2.6rem); margin-bottom:12px; }}
+        .section-title p {{ color:var(--text-muted); max-width:580px; margin:0 auto; }}
+        .services-grid {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:28px; }}
+        .service-card {{ background:var(--surface); border:1px solid var(--border); border-radius:18px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 16px 24px rgba(15,15,15,.04); }}
+        .service-card img {{ aspect-ratio:4/3; object-fit:cover; }}
+        .service-card .content {{ padding:24px; }}
+        .portfolio-grid {{ display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:24px; }}
+        .portfolio-item {{ background:var(--surface); border-radius:18px; overflow:hidden; border:1px solid var(--border); box-shadow:0 16px 24px rgba(15,15,15,.04); }}
+        .portfolio-item img {{ aspect-ratio:4/3; object-fit:cover; }}
         /* Pricing table */
-        .pricing-table-wrapper { overflow:auto; background:var(--surface); border-radius:18px; border:1px solid var(--border); box-shadow:0 16px 24px rgba(15,15,15,.04); }
-        table.pricing { width:100%; border-collapse:collapse; min-width:980px; }
-        table.pricing th, table.pricing td { padding:14px 16px; border-bottom:1px solid var(--border); text-align:left; vertical-align:top; }
-        table.pricing th { position:sticky; top:0; background:#fff8e6; color:#6b4700; font-weight:700; z-index:1; }
-        table.pricing tbody tr:nth-child(even) td { background:#fafafa; }
-        .note { color:var(--text-muted); font-size:.95rem; margin-top:10px; }
-        .export-row { display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin:18px 0 0; }
-        .btn-secondary { display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border-radius:999px; border:1px solid var(--border); background:#fff; color:var(--text); font-weight:600; cursor:pointer; }
-        .btn-secondary:hover { border-color:var(--accent); box-shadow:0 6px 16px rgba(240,180,41,.18);}
-        footer { background:#0f0f10; color:#eaeaef; padding:40px 0; }
-        footer .container { display:flex; flex-direction:column; gap:16px; }
-        .footer-bottom { display:flex; flex-direction:column; gap:8px; font-size:.9rem; color:rgba(234,234,239,.6);}
-        @media (max-width:900px){
-            .hero { grid-template-columns:1fr; text-align:center; }
-        }
+        .pricing-table-wrapper {{ overflow:auto; background:var(--surface); border-radius:18px; border:1px solid var(--border); box-shadow:0 16px 24px rgba(15,15,15,.04); }}
+        table.pricing {{ width:100%; border-collapse:collapse; min-width:980px; }}
+        table.pricing th, table.pricing td {{ padding:14px 16px; border-bottom:1px solid var(--border); text-align:left; vertical-align:top; }}
+        table.pricing th {{ position:sticky; top:0; background:#fff8e6; color:#6b4700; font-weight:700; z-index:1; }}
+        table.pricing tbody tr:nth-child(even) td {{ background:#fafafa; }}
+        .note {{ color:var(--text-muted); font-size:.95rem; margin-top:10px; }}
+        .export-row {{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin:18px 0 0; }}
+        .btn-secondary {{ display:inline-flex; align-items:center; gap:8px; padding:10px 16px; border-radius:999px; border:1px solid var(--border); background:#fff; color:var(--text); font-weight:600; cursor:pointer; }}
+        .btn-secondary:hover {{ border-color:var(--accent); box-shadow:0 6px 16px rgba(240,180,41,.18);}}
+        footer {{ background:#0f0f10; color:#eaeaef; padding:40px 0; }}
+        footer .container {{ display:flex; flex-direction:column; gap:16px; }}
+        .footer-bottom {{ display:flex; flex-direction:column; gap:8px; font-size:.9rem; color:rgba(234,234,239,.6);}}
+        @media (max-width:900px){{
+            .hero {{ grid-template-columns:1fr; text-align:center; }}
+        }}
     </style>
 </head>
 <body>
@@ -140,20 +170,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr><td>Подготовка</td><td>Грунтовка стен (1 слой)</td><td>м²</td><td>80 — 120</td><td>Ориентир по рынку СПб (компании). На Авито у частников часто ниже на 10–20%.</td><td><a href="https://xn----8sbng1abfcfdp2ae.xn--p1ai/shpaklevat-steny" target="_blank" rel="noopener">Источник</a></td><td></td></tr>
-<tr><td>Шпатлевка</td><td>Шпатлевка стен (1 слой)</td><td>м²</td><td>250 — 450</td><td>Диапазон по СПб. Финиш/под покраску дороже.</td><td><a href="https://remont-na5.ru/uslugi/shtukaturnie-raboti/viravnivanie-sten/shpaklevka-sten/" target="_blank" rel="noopener">Источник</a></td><td></td></tr>
-<tr><td>Шпатлевка</td><td>Шпатлевка стен (финиш, под покраску)</td><td>м²</td><td>800 — 1100</td><td>Финишные слои. У частников встречается -10–15%.</td><td><a href="https://remont-vm.com/otdelka-sten/viravnivanie-sten/shpaklevka-sten/" target="_blank" rel="noopener">Источник</a></td><td></td></tr>
-<tr><td>Штукатурка</td><td>Штукатурка стен по маякам (ручная)</td><td>м²</td><td>700 — 1200</td><td>Цена зависит от толщины слоя, состояния основания.</td><td><a href="https://www.ms-stroy.com/stoimost-shtukaturnyh-rabot.html" target="_blank" rel="noopener">Источник</a></td><td></td></tr>
-<tr><td>Штукатурка</td><td>Штукатурка стен по маякам (минимум)</td><td>м²</td><td>260 — 600</td><td>Маркетинговые минимумы. Реально редко.</td><td><a href="https://shtukaturov.ru/service/shtukaturnye-raboty/shtukaturka-sten-po-mayakam/" target="_blank" rel="noopener">Источник</a></td><td></td></tr>
-<tr><td>Стяжка</td><td>Самовыравнивающаяся стяжка пола</td><td>м²</td><td>250 — 400</td><td>По рынку СПб. Толщина влияет на цену.</td><td><a href="https://speedfloor.ru/czeny/shpaklevka-sten-tsena/" target="_blank" rel="noopener">Источник</a></td><td></td></tr>
-<tr><td>Плитка</td><td>Укладка плитки (пол)</td><td>м²</td><td>1200 — 1800</td><td>Керамогранит/крупный формат дороже.</td><td><a href="https://spb-ukladka-plitki.ru/price/" target="_blank" rel="noopener">Источник</a></td><td></td></tr>
-<tr><td>Плитка</td><td>Укладка плитки (стены)</td><td>м²</td><td>1500 — 2200</td><td>Сложные раскладки +10–30%.</td><td><a href="https://plitochnik-pro.ru/spb/prays-list-na-plitochnye-raboty" target="_blank" rel="noopener">Источник</a></td><td></td></tr>
-<tr><td>Обои</td><td>Поклейка обоев (стандарт)</td><td>м²</td><td>210 — 680</td><td>Флизелин и винил дешевле, текстиль/фотообои дороже.</td><td><a href="https://remont-vm.com/otdelka-sten/pokleyka-oboev/" target="_blank" rel="noopener">Источник</a></td><td></td></tr>
-<tr><td>Покраска</td><td>Покраска стен (2 слоя)</td><td>м²</td><td>500 — 800</td><td>Без учёта подготовки основания.</td><td><a href="https://remont-vm.com/otdelka-sten/pokleyka-oboev/" target="_blank" rel="noopener">Источник</a></td><td></td></tr>
-<tr><td>ГКЛ</td><td>Перегородка из ГКЛ (двухсторонняя)</td><td>м²</td><td>500 — 800</td><td>С утеплителем и шумоизоляцией дороже.</td><td><a href="https://xn----8sbng1abfcfdp2ae.xn--p1ai/prays-na-otdelochnye-raboty" target="_blank" rel="noopener">Источник</a></td><td></td></tr>
-<tr><td>Потолки</td><td>Подвесной потолок (ГКЛ)</td><td>м²</td><td>500 — 800</td><td>Многоуровневые и со световыми линиями дороже.</td><td><a href="https://xn----8sbng1abfcfdp2ae.xn--p1ai/prays-na-otdelochnye-raboty" target="_blank" rel="noopener">Источник</a></td><td></td></tr>
-<tr><td>Двери</td><td>Установка межкомнатной двери</td><td>шт</td><td>2100 — 3500</td><td>С доборами/фурнитурой выше.</td><td><a href="https://xn----8sbng1abfcfdp2ae.xn--p1ai/prays-na-otdelochnye-raboty" target="_blank" rel="noopener">Источник</a></td><td></td></tr>
-<tr><td>Электрика</td><td>Электроточка (розетка/выключатель)</td><td>шт</td><td>340 — 500</td><td>Штроба отдельно + длина трассы.</td><td><a href="https://spb.optimumbuilding.ru/otdelka" target="_blank" rel="noopener">Источник</a></td><td></td></tr>
+            {table_rows_html}
           </tbody>
         </table>
       </div>
@@ -187,21 +204,47 @@
 
 <script>
 // Экспорт CSV из таблицы «Цены»
-document.getElementById('exportCsv')?.addEventListener('click', () => {
+document.getElementById('exportCsv')?.addEventListener('click', () => {{
   const table = document.querySelector('table.pricing');
   if (!table) return;
   const rows = Array.from(table.querySelectorAll('tr'));
   const csv = rows.map(r => Array.from(r.querySelectorAll('th,td'))
-    .map(c => '"' + (c.innerText||'').replace(/"/g,'""') + '"').join(','))
-    .join('\n');
-  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    .map(c => '\"' + (c.innerText||'').replace(/\"/g,'\"\"') + '\"').join(','))
+    .join('\\n');
+  const blob = new Blob([csv], {{ type: 'text/csv;charset=utf-8;' }});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
   a.download = 'fasmaster_spb_pricing.csv';
   a.click();
   URL.revokeObjectURL(url);
-});
+}});
 </script>
 </body>
 </html>
+"""
+
+# 5) Write to folder and zip
+site_dir = "/mnt/data/FasMaster_Site"
+os.makedirs(site_dir, exist_ok=True)
+index_path = os.path.join(site_dir, "index.html")
+with open(index_path, "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+# Copy referenced images if exist
+import shutil
+images = ["1.png", "2.png", "3.png", "4.png", "5.png", "generated-image (9).png", "ChatGPT Image 16 окт. 2025 г., 21_41_14.png"]
+for img in images:
+    src = f"/mnt/data/{img}"
+    if os.path.exists(src):
+        shutil.copy(src, os.path.join(site_dir, img))
+
+# Create ZIP
+zip_path = "/mnt/data/FasMaster_Site.zip"
+with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    for root, _, files in os.walk(site_dir):
+        for name in files:
+            full = os.path.join(root, name)
+            z.write(full, arcname=os.path.relpath(full, site_dir))
+
+zip_path

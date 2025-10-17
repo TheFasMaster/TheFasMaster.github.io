@@ -3,150 +3,171 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>FasMaster — внутренняя отделка под ключ</title>
+  <title>Домашний мастер — внутренняя отделка (СПб)</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2064%2064%27%3E%0A%20%20%3Ccircle%20cx%3D%2732%27%20cy%3D%2732%27%20r%3D%2730%27%20fill%3D%27white%27/%3E%0A%20%20%3Cpath%20d%3D%27M16%2034c0-8.8%207.2-16%2016-16s16%207.2%2016%2016v2h2a4%204%200%20014%204v6H10v-6a4%204%200%20014-4h2v-2z%27%20fill%3D%27%23F4C430%27%20stroke%3D%27%230E0E0E%27%20stroke-width%3D%272%27%20stroke-linejoin%3D%27round%27/%3E%0A%20%20%3Cpath%20d%3D%27M22%2029c2-4%206-7%2010-7s8%203%2010%207%27%20fill%3D%27none%27%20stroke%3D%27%231E66F5%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27/%3E%0A%3C/svg%3E"/>
   <style>
-    :root {
-      --yellow: #F4C430;   /* жёлтый акцент */
-      --blue:   #1E66F5;   /* синий акцент */
-      --black:  #0E0E0E;   /* чёрный шрифт */
-      --white:  #FFFFFF;   /* белый фон */
-      --muted:  #5A5A5A;
-      --border: #E6E6EA;
-    }
-    *, *::before, *::after { box-sizing: border-box; }
-    html, body { margin:0; padding:0; }
-    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color: var(--black); background: var(--white); line-height: 1.6; }
-    img { max-width:100%; display:block; border-radius: 14px; }
+    :root { --yellow:#F4C430; --blue:#1E66F5; --black:#0E0E0E; --border:#E6E6EA; --muted:#5A5A5A; }
+    *,*::before,*::after { box-sizing:border-box; }
+    html,body { margin:0; padding:0; scroll-behavior:smooth; }
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:#000; background:#fff; line-height:1.6; }
+    img { max-width:100%; display:block; border-radius:14px; }
 
-    /* Header (simple, no external links) */
-    header { position: sticky; top:0; background: rgba(255,255,255,.9); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); z-index: 10; }
-    .container { width: min(1180px, 92vw); margin: 0 auto; }
-    .nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
-    .logo { display:flex; align-items:center; gap:10px; font-weight: 800; letter-spacing: .02em; }
-    .logo-badge { width: 14px; height: 14px; border-radius: 50%; background: linear-gradient(135deg, var(--yellow), var(--blue)); display:inline-block; }
+    header { position:sticky; top:0; background:rgba(255,255,255,.9); backdrop-filter:blur(8px); border-bottom:1px solid var(--border); z-index:50; }
+    .container { width:min(1180px,92vw); margin:0 auto; }
+    .nav { display:flex; align-items:center; justify-content:space-between; padding:12px 0; }
+    .brand { display:flex; align-items:center; gap:10px; font-weight:900; letter-spacing:.02em; }
+    .dot { width:16px; height:16px; border-radius:50%; background:linear-gradient(135deg,var(--yellow),var(--blue)); }
+    .menu { display:flex; align-items:center; gap:18px; }
+    .menu a { text-decoration:none; color:#000; font-weight:700; padding:8px 10px; border-radius:10px; }
+    .menu a:hover { background: rgba(30,102,245,.08); color: var(--blue); }
+    .cta { border:0; background:linear-gradient(135deg,var(--yellow),#E4AF10); color:#000; font-weight:900; padding:10px 16px; border-radius:999px; cursor:pointer; }
+    .burger { display:none; width:36px; height:36px; border:1px solid var(--border); border-radius:10px; background:#fff; }
+    .burger span { display:block; width:18px; height:2px; background:#000; margin:6px auto; }
 
-    /* Hero */
-    .hero { padding: 56px 0 32px; display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; }
-    .eyebrow { display:inline-block; background: rgba(30,102,245,.08); color: var(--blue); padding: 6px 12px; border-radius: 999px; font-weight: 700; font-size: .9rem; }
-    h1 { font-size: clamp(2.1rem, 4vw, 3.2rem); line-height: 1.1; margin: 16px 0 12px; }
-    .lead { color: var(--muted); font-size: 1.05rem; }
-    .hero-stats { display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; margin-top: 26px; }
-    .stat { border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
-    .stat strong { font-size: 1.6rem; display:block; }
+    .mobile { display:none; position:fixed; inset:0; background:rgba(0,0,0,.6); }
+    .mobile-panel { position:absolute; right:0; top:0; height:100%; width:min(80vw,320px); background:#fff; padding:16px; display:flex; flex-direction:column; gap:8px; border-left:1px solid var(--border); }
+    .mobile a { padding:12px; text-decoration:none; color:#000; border-radius:8px; }
+    .mobile a:hover { background: rgba(244,196,48,.18); }
+    .mobile .close { align-self:flex-end; border:1px solid var(--border); background:#fff; border-radius:8px; padding:6px 10px; cursor:pointer; }
 
-    /* Sections */
-    section { padding: 64px 0; }
-    .section-title { text-align:center; margin-bottom: 28px; }
-    .section-title h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 0 0 8px; }
-    .section-title p { color: var(--muted); margin: 0 auto; max-width: 560px; }
+    .hero { padding:56px 0 24px; display:grid; grid-template-columns:1.1fr .9fr; gap:40px; align-items:center; }
+    .eyebrow { display:inline-block; background:rgba(30,102,245,.08); color:#1E66F5; padding:6px 12px; border-radius:999px; font-weight:900; font-size:.9rem; }
+    h1 { font-size:clamp(2.1rem,4vw,3.1rem); line-height:1.1; margin:16px 0 12px; }
+    .lead { color:var(--muted); font-size:1.05rem; }
+    .hero-stats { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; margin-top:20px; }
+    .stat { border:1px solid var(--border); border-radius:14px; padding:12px 14px; }
+    .stat strong { font-size:1.5rem; display:block; }
 
-    /* Services */
-    .grid { display:grid; gap: 18px; }
-    .services { grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    section { padding:64px 0; }
+    .section-title { text-align:center; margin-bottom:28px; }
+    .section-title h2 { font-size:clamp(1.6rem,3vw,2.2rem); margin:0 0 8px; }
+    .section-title p { color:var(--muted); margin:0 auto; max-width:560px; }
+    .grid { display:grid; gap:18px; }
+    .services { grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); }
     .card { border:1px solid var(--border); border-radius:16px; overflow:hidden; }
-    .card .content { padding: 18px; }
-    .card h3 { margin: 6px 0 8px; font-size: 1.08rem; }
+    .card .content { padding:16px 18px; }
+    .card h3 { margin:6px 0 8px; font-size:1.08rem; }
 
-    /* Portfolio */
-    .portfolio { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+    .portfolio { grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
 
-    /* Pricing */
-    .pricing-wrap { border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
-    table.pricing { width:100%; border-collapse: collapse; }
-    table.pricing th, table.pricing td { padding: 12px 14px; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
-    table.pricing thead th { background: linear-gradient(0deg, rgba(244,196,48,.15), rgba(244,196,48,.15)); color: var(--black); font-weight: 800; }
-    table.pricing tbody tr:nth-child(odd) td { background: #FCFCFD; }
-    .legend { font-size: .95rem; color: var(--muted); margin-top: 10px; }
+    .pricing-wrap { border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+    table.pricing { width:100%; border-collapse:collapse; }
+    table.pricing th, table.pricing td { padding:12px 14px; border-bottom:1px solid var(--border); text-align:left; vertical-align:top; }
+    table.pricing thead th { background:linear-gradient(0deg,rgba(244,196,48,.15),rgba(244,196,48,.15)); color:#000; font-weight:900; }
+    table.pricing tbody tr:nth-child(odd) td { background:#FCFCFD; }
+    .legend { font-size:.95rem; color:var(--muted); margin-top:10px; }
 
-    /* Contact (no links) */
-    .contact-box { border:1px solid var(--border); border-radius: 16px; padding: 18px; }
-    .contact-grid { display:grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .hourly-wrap { border:1px solid var(--border); border-radius:16px; overflow:hidden; }
+    table.hourly { width:100%; border-collapse:collapse; }
+    table.hourly th, table.hourly td { padding:12px 14px; border-bottom:1px solid var(--border); text-align:left; }
+    table.hourly thead th { background:linear-gradient(0deg,rgba(30,102,245,.12),rgba(30,102,245,.12)); color:#000; font-weight:900; }
 
-    /* Footer */
-    footer { padding: 32px 0 46px; border-top: 1px solid var(--border); }
-    .brandline { height: 6px; background: linear-gradient(90deg, var(--yellow), var(--blue)); border-radius: 999px; margin-bottom: 12px; }
+    .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .contact-box { border:1px solid var(--border); border-radius:16px; padding:18px; }
+    .contact-box h3 { margin:0 0 6px; }
 
-    /* Mobile */
-    @media (max-width: 900px) {
-      .hero { grid-template-columns: 1fr; gap: 24px; }
-      .hero-stats { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
-      .contact-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 600px) {
-      .hero-stats { grid-template-columns: 1fr 1fr; }
-      .logo { font-size: 1rem; }
+    .modal-backdrop { position:fixed; inset:0; background:rgba(0,0,0,.55); display:none; align-items:center; justify-content:center; z-index:100; }
+    .modal { width:min(92vw,540px); background:#fff; border-radius:16px; border:1px solid var(--border); box-shadow:0 30px 80px rgba(0,0,0,.2); padding:18px; }
+    .modal h3 { margin:0 0 10px; }
+    .modal form { display:grid; gap:12px; }
+    .modal label { font-weight:900; }
+    .modal input, .modal textarea { width:100%; padding:12px; border:1px solid var(--border); border-radius:12px; font:inherit; }
+    .modal textarea { min-height:120px; resize:vertical; }
+    .modal .row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .modal .actions { display:flex; gap:10px; justify-content:flex-end; }
+    .btn { border:0; background:linear-gradient(135deg,var(--yellow),#E4AF10); color:#000; font-weight:900; padding:10px 16px; border-radius:999px; cursor:pointer; }
+    .btn.secondary { background:#fff; border:1px solid var(--border); font-weight:800; }
+
+    footer { padding:32px 0 46px; border-top:1px solid var(--border); }
+    .brandline { height:6px; background:linear-gradient(90deg,var(--yellow),var(--blue)); border-radius:999px; margin-bottom:12px; }
+
+    @media (max-width:900px) {
+      .hero { grid-template-columns:1fr; gap:24px; }
+      .hero-stats { grid-template-columns:1fr 1fr; gap:8px; }
+      .contact-grid { grid-template-columns:1fr; }
+      .menu { display:none; }
+      .burger { display:block; }
     }
   </style>
 </head>
 <body>
   <header>
     <div class="container nav">
-      <div class="logo"><span class="logo-badge"></span> FasMaster</div>
-      <div style="font-weight:700;color:var(--blue);">Внутренняя отделка под ключ</div>
+      <div class="brand"><span class="dot"></span> Домашний мастер</div>
+      <nav class="menu">
+        <a href="#services">Услуги</a>
+        <a href="#portfolio">Портфолио</a>
+        <a href="#pricing">Цены</a>
+        <a href="#hourly">Почасовые</a>
+        <a href="#contacts">Контакты</a>
+        <button class="cta" id="openModal">Связаться</button>
+      </nav>
+      <button class="burger" id="openMobile" aria-label="Открыть меню"><span></span><span></span><span></span></button>
     </div>
   </header>
 
+  <div class="mobile" id="mobileOverlay" aria-hidden="true">
+    <div class="mobile-panel">
+      <button class="close" id="closeMobile">Закрыть</button>
+      <a href="#services" onclick="closeMobile()">Услуги</a>
+      <a href="#portfolio" onclick="closeMobile()">Портфолио</a>
+      <a href="#pricing" onclick="closeMobile()">Цены</a>
+      <a href="#hourly" onclick="closeMobile()">Почасовые</a>
+      <a href="#contacts" onclick="closeMobile()">Контакты</a>
+      <button class="cta" style="margin-top:6px" onclick="openModal(); closeMobile();">Связаться</button>
+    </div>
+  </div>
+
   <main>
-    <!-- Hero -->
-    <section class="container hero">
+    <section class="container hero" id="top">
       <div>
-        <span class="eyebrow">СПб • Москва</span>
-        <h1>Современная отделка и инженерия — точно в срок</h1>
-        <p class="lead">От идеи до сдачи. Собственные бригады, прозрачные сметы и фотофиксация скрытых работ.</p>
+        <span class="eyebrow">Санкт‑Петербург</span>
+        <h1>Отделка и ремонт квартир, аккуратно и по делу</h1>
+        <p class="lead">Чистая работа, свои мастера, прозрачные сроки.</p>
         <div class="hero-stats">
           <div class="stat"><strong>9 лет</strong><span>опыта</span></div>
           <div class="stat"><strong>120+</strong><span>объектов</span></div>
           <div class="stat"><strong>5 лет</strong><span>гарантия</span></div>
         </div>
       </div>
-      <div><img src="1.png" alt="Объект отделки FasMaster"></div>
+      <div><img src="1.png" alt="Мастер по отделке наносит штукатурку"></div>
     </section>
 
-    <!-- Services -->
-    <section class="container">
+    <section class="container" id="services">
       <div class="section-title">
         <h2>Услуги</h2>
-        <p>Черновая и чистовая отделка, инженерные сети, потолочные системы.</p>
+        <p>Черновая и чистовая отделка, электрика, сантехника, потолочные системы.</p>
       </div>
       <div class="grid services">
-        <article class="card"><img src="2.png" alt="Черновая отделка"><div class="content"><h3>Черновая отделка</h3><p>Выравнивание, шумоизоляция, подготовка оснований.</p></div></article>
-        <article class="card"><img src="3.png" alt="Финишные покрытия"><div class="content"><h3>Финишные покрытия</h3><p>Плитка, покраска, декоративные составы, напольные покрытия.</p></div></article>
-        <article class="card"><img src="4.png" alt="Инженерные сети"><div class="content"><h3>Инженерные сети</h3><p>Электрика, сантехника, вентиляция, кондиционирование.</p></div></article>
-        <article class="card"><img src="5.png" alt="Потолочные системы"><div class="content"><h3>Потолочные системы</h3><p>Многоуровневые, акустические, световые линии.</p></div></article>
+        <article class="card"><img src="2.png" alt="Плиточные работы"><div class="content"><h3>Плиточные работы</h3><p>Полы и стены, раскладки, гидроизоляция, затирка.</p></div></article>
+        <article class="card"><img src="2d768873-4eb4-434a-a665-6b5c6eb54c68.png" alt="Напольные покрытия"><div class="content"><h3>Напольные покрытия</h3><p>Ламинат, паркетная доска, подложка, плинтусы.</p></div></article>
+        <article class="card"><img src="3df0054c-7bbd-4de3-a055-b11c794ac19a.png" alt="Малярные работы"><div class="content"><h3>Малярные работы</h3><p>Шпатлёвка, грунт, покраска, декоративные составы.</p></div></article>
+        <article class="card"><img src="4.png" alt="Потолочные системы"><div class="content"><h3>Потолочные системы</h3><p>ГКЛ/АКП, скрытый свет, акустика.</p></div></article>
       </div>
     </section>
 
-    <!-- Portfolio -->
-    <section class="container">
+    <section class="container" id="portfolio">
       <div class="section-title">
         <h2>Портфолио</h2>
-        <p>Подбираем решения под архитектуру и задачи клиента.</p>
+        <p>Некоторые процессы и объекты из практики.</p>
       </div>
       <div class="grid portfolio">
-        <div class="card"><img src="generated-image (9).png" alt="Интерьер 1"></div>
-        <div class="card"><img src="ChatGPT Image 16 окт. 2025 г., 21_41_14.png" alt="Интерьер 2"></div>
-        <div class="card"><img src="3.png" alt="Инженерные работы"></div>
-        <div class="card"><img src="4.png" alt="Потолочные системы"></div>
+        <div class="card"><img src="7da32762-78ee-4a95-86d8-1de2e8378d48.png" alt="Объект в работе — отделка и плитка"></div>
+        <div class="card"><img src="7da32762-78ee-4a95-86d8-1de2e8378d48 (1).png" alt="Объект в работе — укладка плитки"></div>
+        <div class="card"><img src="8c776420-4c51-4ca0-9cb1-c9c08a8d979e.png" alt="Демонтажные работы"></div>
+        <div class="card"><img src="217b8d95-32da-499c-b839-23b62bb697b8.png" alt="Гидроизоляция основания"></div>
+        <div class="card"><img src="692b81bf-c4ef-4081-81ca-a7fe813e065f.png" alt="Покраска фасада"></div>
       </div>
     </section>
 
-    <!-- Pricing -->
-    <section class="container">
+    <section class="container" id="pricing">
       <div class="section-title">
         <h2>Цены (СПб)</h2>
-        <p>Ориентиры по внутренней отделке. Итоговая стоимость зависит от сложности, материалов и состояния основания.</p>
+        <p>Ориентиры по внутренней отделке. Итог зависит от сложности, материалов и состояния основания.</p>
       </div>
       <div class="pricing-wrap">
         <table class="pricing">
-          <thead>
-            <tr>
-              <th>Раздел</th>
-              <th>Работа</th>
-              <th>Ед. изм.</th>
-              <th>Диапазон цены, ₽</th>
-              <th>Комментарий</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Раздел</th><th>Работа</th><th>Ед. изм.</th><th>Диапазон цены, ₽</th><th>Комментарий</th></tr></thead>
           <tbody>
             <tr><td>Подготовка</td><td>Грунтовка стен (1 слой)</td><td>м²</td><td>80 — 120</td><td>Ориентир по рынку СПб (компании). На Авито у частников часто ниже на 10–20%.</td></tr>
 <tr><td>Шпатлевка</td><td>Шпатлевка стен (1 слой)</td><td>м²</td><td>250 — 450</td><td>Диапазон по СПб. Финиш/под покраску дороже.</td></tr>
@@ -165,24 +186,36 @@
           </tbody>
         </table>
       </div>
-      <p class="legend">* Частники на рынке часто предлагают цены на 10–20% ниже прайсов компаний.</p>
     </section>
 
-    <!-- Contact (no links) -->
-    <section class="container">
+    <section class="container" id="hourly">
+      <div class="section-title">
+        <h2>Почасовые работы</h2>
+        <p>Для мелкого ремонта и быстрых задач.</p>
+      </div>
+      <div class="hourly-wrap">
+        <table class="hourly">
+          <thead><tr><th>Работа</th><th>Ед.</th><th>Цена, ₽</th><th>Комментарий</th></tr></thead>
+          <tbody>
+            <tr><td>Мелкий ремонт</td><td>ч</td><td>1200–1600</td><td>Полка, плинтусы, мелкий монтаж</td></tr>
+<tr><td>Электрика (мелкие)</td><td>ч</td><td>1400–2200</td><td>Розетки, выключатели, светильники</td></tr>
+<tr><td>Сантехника (мелкие)</td><td>ч</td><td>1500–2300</td><td>Смесители, сифон, подключение техники</td></tr>
+<tr><td>Сборка мебели</td><td>ч</td><td>1300–2000</td><td>Шкафы, комоды, кухни по месту</td></tr>
+<tr><td>Плотницкие работы</td><td>ч</td><td>1400–2200</td><td>Доборы, наличники, короб</td></tr>
+<tr><td>Демонтаж</td><td>ч</td><td>1200–2000</td><td>Аккуратный демонтаж, вынос отдельно</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="container" id="contacts">
       <div class="section-title">
         <h2>Контакты</h2>
-        <p>Напишите или позвоните — подготовим предварительную смету и график работ.</p>
+        <p>Заполните форму — перезвоним и уточним детали. Почта скрыта.</p>
       </div>
       <div class="contact-grid">
-        <div class="contact-box">
-          <h3 style="margin:0 0 8px">Телефон</h3>
-          <div>+7 (981) 928‑53‑28</div>
-        </div>
-        <div class="contact-box">
-          <h3 style="margin:0 0 8px">Email</h3>
-          <div>info@fasmaster.ru</div>
-        </div>
+        <div class="contact-box"><h3>Телефон</h3><div>+7 (981) 928‑53‑28</div></div>
+        <div class="contact-box"><h3>Город</h3><div>Санкт‑Петербург и область</div></div>
       </div>
     </section>
   </main>
@@ -190,9 +223,62 @@
   <footer>
     <div class="container">
       <div class="brandline"></div>
-      <div style="font-weight:700; margin-bottom:6px;">FasMaster</div>
-      <div style="color:#7a7a7a;">© 2025. Качество, точность и стиль в каждом интерьере.</div>
+      <div style="font-weight:900; margin-bottom:6px;">Домашний мастер</div>
+      <div style="color:#7a7a7a;">© 2025. Санкт‑Петербург.</div>
     </div>
   </footer>
+
+  <div class="modal-backdrop" id="modal">
+    <div class="modal">
+      <h3>Связаться</h3>
+      <form id="contactForm">
+        <div class="row">
+          <div><label for="name">Имя</label><input id="name" name="name" placeholder="Ваше имя" required></div>
+          <div><label for="phone">Телефон</label><input id="phone" name="phone" placeholder="+7 (___) ___‑__‑__" required></div>
+        </div>
+        <div><label for="message">Сообщение</label><textarea id="message" name="message" placeholder="Опишите задачу: площадь, работы"></textarea></div>
+        <div class="actions">
+          <button type="button" class="btn secondary" id="cancelModal">Отмена</button>
+          <button type="submit" class="btn">Отправить</button>
+        </div>
+        <div id="formStatus" style="margin-top:8px; font-size:.95rem;"></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    // Mobile drawer
+    const mobile = document.getElementById('mobileOverlay');
+    const openMobileBtn = document.getElementById('openMobile');
+    const closeMobileBtn = document.getElementById('closeMobile');
+    function openMobile() { mobile.style.display = 'block'; }
+    function closeMobile() { mobile.style.display = 'none'; }
+    openMobileBtn?.addEventListener('click', openMobile);
+    closeMobileBtn?.addEventListener('click', closeMobile);
+
+    // Modal
+    const modal = document.getElementById('modal');
+    const openModalBtn = document.getElementById('openModal');
+    const cancelModal = document.getElementById('cancelModal');
+    function openModal() { modal.style.display = 'flex'; }
+    function closeModal() { modal.style.display = 'none'; }
+    openModalBtn?.addEventListener('click', openModal);
+    cancelModal?.addEventListener('click', closeModal);
+    modal?.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+
+    // Hidden mailto (email не показывается на странице)
+    const form = document.getElementById('contactForm');
+    form?.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const subject = encodeURIComponent('Заявка с сайта Домашний мастер');
+      const body = encodeURIComponent('Имя: '+name+'\nТелефон: '+phone+'\nСообщение: '+(message||'—'));
+      const to = atob('Z2VuZi5lbWV0czJAZ21haWwuY29t'); // base64
+      window.location.href = 'mailto:'+to+'?subject='+subject+'&body='+body;
+      closeModal();
+    });
+  </script>
 </body>
 </html>
